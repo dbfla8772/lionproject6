@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <h1>Music Search Result</h1><hr>
+    {% if not blogs %}
+       <h4>{{search_type}} '{{search_key}}' 검색 결과가 없습니다</h4>
+    {% else %}
+    <h4>{{search_type}} '{{search_key}}' 검색 결과</h4>
+    <div class="container">
+        <div class="row">
+          {% for blogRow in blogs.all %} 
+            <div class="card m-3 border-dark" style="width: 23rem; margin: auto;">
+              <img src="{{blogRow.image_thumbnail.url}}" class="card-img-top">
+              <div class="card-body">
+                <h3 class="card-title">{{blogRow.title}}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">{{blogRow.singer}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{blogRow.genre}}</li>
+                  <li class="list-group-item">{{blogRow.rel_date}}</li>
+              </ul>
+              <div class="card-body">
+                <p class="card-text">{{blogRow.summary}}</p>
+                <a href="{%url 'detail' blogRow.id %}" class="card-link" style="font-size: large;">...more</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>  
+      </div>
+      {% endif %}
+    </body>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+  {% block content %}
+  <body>
+    <h1>Detail Your Music</h1>
+    <div class="container">
+      <div class="card border-dark" style="width: 25rem; margin: auto;" >
+        <img src="{{blog.image.url}}" class="card-img-top">
+        <div class="card-body">
+          <h3 class="card-title">{{blog.title}}</h3>
+          <h6 class="card-subtitle mb-2 text-muted">{{blog.singer}}</h6>
+          <p class="card-text">{{blog.lyrics}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{blog.genre}}</li>
+          <li class="list-group-item">{{blog.rel_date}}</li>
+        </ul>
+        <div class="card-footer text-muted">{{blog.composer}}</div>
+        <div class="card-body">
+          <a href="{% url 'edit' blog.id %}" class="card-link" style="font-size: large; font-style: italic;">수정하기</a>
+          <a href="{% url 'delete' blog.id %}" class="card-link" style="font-size: large; font-style: italic;">삭제하기</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

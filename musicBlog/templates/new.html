@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <body>
+        <h1>Write Your Movie</h1> 
+        <form action="{%url 'new' %}" method="post" enctype="multipart/form-data">
+            <table style="border: 1px black solid; border-collapse:collapse; margin: auto;">
+                <tr><td style="padding: 20px">
+                {%csrf_token%}
+                {{post_form.as_p}}</td></tr>
+            </table><br>
+            <button type="submit" class="btn btn-outline-dark">추가</button>
+        </form>
+    </body>
+</html>
+{% endblock %}

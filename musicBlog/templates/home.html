@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load socialaccount %}
+{% providers_media_js %}
+
+    {% block content %}
+    <body>
+        <h1>Music Blog</h1>
+        <div class="container">
+          <div class="row">
+            {% for blogRow in blogs %} 
+              <div class="card m-3 border-dark" style="width: 23rem; margin: auto;">
+                <img src="{{blogRow.image_thumbnail.url}}" class="card-img-top">
+                <div class="card-body">
+                  <h3 class="card-title">{{blogRow.title}}</h3>
+                  <h6 class="card-subtitle mb-2 text-muted">{{blogRow.singer}}</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{blogRow.genre}}</li>
+                	<li class="list-group-item">{{blogRow.rel_date}}</li>
+                </ul>
+                <div class="card-body">
+                  <p class="card-text">{{blogRow.summary}}</p>
+                  <a href="{%url 'detail' blogRow.id %}" class="card-link" style="font-size: large;">...more</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>  
+        </div>
+
+        {% if blogs.has_previous %} 
+        <a href="?page=1">처음</a>
+        <a href="?page={{blogs.previous_page_number}}">이전</a> 
+        {% endif %}
+
+        <span>{{blogs.number}}</span> <!-- 현재 보고 있는 페이지 -->
+        <span>of</span>
+        <span>{{blogs.paginator.num_pages}}</span> <!-- 마지막 페이지의 수 -->
+
+        {% if blogs.has_next %} <!-- 다음 글이 있는지 -->
+        <a href="?page={{blogs.next_page_number}}">다음</a>
+        <a href="?page={{blogs.paginator.num_pages}}">마지막</a> <!-- 마지막 페이지 -->
+        {% endif %}
+    </body>
+</html>
+{% endblock %}
